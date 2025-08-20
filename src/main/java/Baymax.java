@@ -20,6 +20,14 @@ public class Baymax {
         printMsg("added: " + task);
     }
 
+    private static void printTasks() {
+        printLine();
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
+        }
+        printLine();
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -30,7 +38,11 @@ public class Baymax {
         String input = scanner.nextLine();
 
         while (!input.equals("bye")) {
-            addTask(input);
+            if (input.equals("list")) {
+                printTasks();
+            } else {
+                addTask(input);
+            }
             input = scanner.nextLine();
         }
 
