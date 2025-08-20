@@ -1,10 +1,11 @@
 public class Baymax {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String HORIZONTAL = "───────────────────────────────────────────────────────────────";
+
+        System.out.println(HORIZONTAL);
+        System.out.println("Hello! I am Baymax, your personal chatbot companion.\nI am here to help.");
+        System.out.println(HORIZONTAL);
+        System.out.println("Bye!");
+        System.out.println(HORIZONTAL);
     }
 }
