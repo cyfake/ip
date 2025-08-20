@@ -11,7 +11,7 @@ public class Baymax {
                 Hello! I am Baymax, your personal chatbot companion.
                 I am here to help.""");
         printLine();
-        System.out.println("Bye!");
+        System.out.println("I will deactivate now.");
         printLine();
     }
 }
