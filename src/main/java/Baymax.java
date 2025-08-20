@@ -9,8 +9,7 @@ public class Baymax {
         printLine();
         System.out.println("""
                 Hello! I am Baymax, your personal chatbot companion.
-                I am here to help.
-                """);
+                I am here to help.""");
         printLine();
         System.out.println("Bye!");
         printLine();
