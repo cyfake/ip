@@ -1,11 +1,18 @@
 public class Baymax {
-    public static void main(String[] args) {
-        String HORIZONTAL = "───────────────────────────────────────────────────────────────";
+    private static final String HORIZONTAL = "────────────────────────────────────────────────────────────";
 
+    private static void printLine() {
         System.out.println(HORIZONTAL);
-        System.out.println("Hello! I am Baymax, your personal chatbot companion.\nI am here to help.");
-        System.out.println(HORIZONTAL);
+    }
+
+    public static void main(String[] args) {
+        printLine();
+        System.out.println("""
+                Hello! I am Baymax, your personal chatbot companion.
+                I am here to help.
+                """);
+        printLine();
         System.out.println("Bye!");
-        System.out.println(HORIZONTAL);
+        printLine();
     }
 }
