@@ -4,7 +4,7 @@ public class Baymax {
     private static final String HORIZONTAL = "────────────────────────────────────────────────────────────";
 
     private static void printLine() {
-        System.out.println(HORIZONTAL);
+        System.out.println("\t" + HORIZONTAL);
     }
 
     public static void main(String[] args) {
@@ -12,20 +12,21 @@ public class Baymax {
 
         printLine();
         System.out.println("""
-                Hello! I am Baymax, your personal chatbot companion.
-                I am here to help.""");
+                \tHello! I am Baymax, your personal chatbot companion.
+                \tI am here to help.""");
         printLine();
 
         String input = scanner.nextLine();
 
         while (!input.equals("bye")) {
             printLine();
-            System.out.println(input);
+            System.out.println("\t" + input);
             printLine();
             input = scanner.nextLine();
         }
 
-        System.out.println("I will deactivate now.");
+        printLine();
+        System.out.println("\tI will deactivate now.");
         printLine();
     }
 }
