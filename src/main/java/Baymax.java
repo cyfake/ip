@@ -7,26 +7,26 @@ public class Baymax {
         System.out.println("\t" + HORIZONTAL);
     }
 
+    private static void printMsg(String msg) {
+        printLine();
+        System.out.println("\t" + msg);
+        printLine();
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        printLine();
-        System.out.println("""
-                \tHello! I am Baymax, your personal chatbot companion.
+        printMsg("""
+                Hello! I am Baymax, your personal chatbot companion.
                 \tI am here to help.""");
-        printLine();
 
         String input = scanner.nextLine();
 
         while (!input.equals("bye")) {
-            printLine();
-            System.out.println("\t" + input);
-            printLine();
+            printMsg(input);
             input = scanner.nextLine();
         }
 
-        printLine();
-        System.out.println("\tI will deactivate now.");
-        printLine();
+        printMsg("I will deactivate now.");
     }
 }
