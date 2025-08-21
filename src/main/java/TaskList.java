@@ -7,12 +7,14 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-
     public String addTask(Task task) {
         this.tasks.add(task);
         return String.format("""
                 Got it. I've added this task:
-                \t%s""", task);
+                \t\t%s
+                \tNow you have %d tasks in the list.""",
+                task,
+                tasks.size());
 
     }
 
@@ -25,8 +27,6 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             str.append("\t%d. %s\n".formatted(i + 1, tasks.get(i)));
         }
-
-        str.append("\tNow you have %d tasks in the list.".formatted(tasks.size()));
 
         return str.toString();
     }
