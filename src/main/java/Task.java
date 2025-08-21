@@ -19,7 +19,7 @@ public class Task {
         this.isDone = true;
 
         return """
-                Nice! I've marked this task as done:
+                Task complete. You are doing a wonderful job.
                 \t""" + this.getTask();
     }
 
@@ -27,7 +27,7 @@ public class Task {
         this.isDone = false;
 
         return """
-                OK, I've marked this task as not done yet:
+                I have unmarked this task.
                 \t""" + this.getTask();
     }
 }

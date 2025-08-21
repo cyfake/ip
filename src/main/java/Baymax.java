@@ -23,7 +23,9 @@ public class Baymax {
 
     private static void printTasks() {
         printLine();
-        System.out.println("\tHere are the tasks in your list: ");
+        System.out.println("\t" +
+                "Here are the tasks I found in your list. " +
+                "Let’s take care of them together:");
 
         for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("\t%d. %s\n", i + 1, tasks.get(i).getTask());
@@ -66,6 +68,7 @@ public class Baymax {
             command = parts[0];
         }
 
-        printMsg("I will deactivate now.");
+        printMsg("I will deactivate now. " +
+                "I hope you are satisfied with my care.");
     }
 }
