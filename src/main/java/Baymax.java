@@ -16,7 +16,7 @@ public class Baymax {
     }
 
     private static void addTask(String description) {
-        Task task = new Task(description);
+        Task task = new ToDo(description);
         tasks.add(task);
         printMsg("added: " + description);
     }
@@ -28,7 +28,7 @@ public class Baymax {
                 "Let’s take care of them together:");
 
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("\t%d. %s\n", i + 1, tasks.get(i).getTask());
+            System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
         }
         printLine();
     }

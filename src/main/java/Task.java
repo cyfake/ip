@@ -1,6 +1,6 @@
-public class Task {
-    private String description;
-    private boolean isDone;
+public abstract class Task {
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -11,7 +11,8 @@ public class Task {
         return this.isDone ? "X" : " ";
     }
 
-    public String getTask() {
+    @Override
+    public String toString() {
         return String.format("[%s] %s", this.getStatus(), this.description);
     }
 
@@ -20,7 +21,7 @@ public class Task {
 
         return """
                 Task complete. You are doing a wonderful job.
-                \t""" + this.getTask();
+                \t""" + this;
     }
 
     public String unmark() {
@@ -28,6 +29,6 @@ public class Task {
 
         return """
                 I have unmarked this task.
-                \t""" + this.getTask();
+                \t""" + this;
     }
 }
