@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Baymax {
     private static final String HORIZONTAL = "────────────────────────────────────────────────────────────";
-    private static ArrayList<Task> tasks = new ArrayList<Task>();
+    private static TaskList tasks = new TaskList();
 
     private static void printLine() {
         System.out.println("\t" + HORIZONTAL);
@@ -12,24 +12,6 @@ public class Baymax {
     private static void printMsg(String msg) {
         printLine();
         System.out.println("\t" + msg);
-        printLine();
-    }
-
-    private static void addTask(String description) {
-        Task task = new ToDo(description);
-        tasks.add(task);
-        printMsg("added: " + description);
-    }
-
-    private static void printTasks() {
-        printLine();
-        System.out.println("\t" +
-                "Here are the tasks I found in your list. " +
-                "Let’s take care of them together:");
-
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
-        }
         printLine();
     }
 
@@ -49,18 +31,18 @@ public class Baymax {
         while (!command.equals("bye")) {
             switch (command) {
                 case "list":
-                    printTasks();
+                    printMsg(tasks.toString());
                     break;
                 case "mark":
-                    index =  Integer.parseInt(parts[1]);
-                    printMsg(tasks.get(index - 1).mark());
+                    index = Integer.parseInt(parts[1]) - 1;
+                    printMsg(tasks.mark(index));
                     break;
                 case "unmark":
-                    index =  Integer.parseInt(parts[1]);
-                    printMsg(tasks.get(index - 1).unmark());
+                    index = Integer.parseInt(parts[1]) - 1;
+                    printMsg(tasks.unmark(index));
                     break;
                 default:
-                    addTask(input);
+                    printMsg(tasks.addTask(new ToDo(input)));
             }
             input = scanner.nextLine();
             parts = input.split(" ",2);
