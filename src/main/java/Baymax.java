@@ -27,6 +27,8 @@ public class Baymax {
 
         String command = parts[0];
         int index;
+        String description;
+        String[] str;
 
         while (!command.equals("bye")) {
             switch (command) {
@@ -41,12 +43,29 @@ public class Baymax {
                     index = Integer.parseInt(parts[1]) - 1;
                     printMsg(tasks.unmark(index));
                     break;
+                case "todo":
+                    description = parts[1];
+                    printMsg(tasks.addTask(new ToDo(description)));
+                    break;
+                case "deadline":
+                    str = parts[1].split(" /by ", 2);
+                    description = str[0];
+                    String deadline = str[1];
+                    printMsg(tasks.addTask(new Deadline(description, deadline)));
+                    break;
+                case "event":
+                    str = parts[1].split(" /from | /to ");
+                    description = str[0];
+                    String start = str[1];
+                    String end = str[2];
+                    printMsg(tasks.addTask(new Event(description, start, end)));
+                    break;
                 default:
-                    printMsg(tasks.addTask(new ToDo(input)));
+                    printMsg("Unknown command.");
             }
+
             input = scanner.nextLine();
             parts = input.split(" ",2);
-
             command = parts[0];
         }
 
