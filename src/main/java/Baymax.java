@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Baymax {
     private static final String HORIZONTAL = "────────────────────────────────────────────────────────────";
-    private static ArrayList<String> tasks = new ArrayList<String>();
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     private static void printLine() {
         System.out.println("\t" + HORIZONTAL);
@@ -15,9 +15,10 @@ public class Baymax {
         printLine();
     }
 
-    private static void addTask(String task) {
+    private static void addTask(String description) {
+        Task task = new Task(description);
         tasks.add(task);
-        printMsg("added: " + task);
+        printMsg("added: " + description);
     }
 
     private static void printTasks() {
