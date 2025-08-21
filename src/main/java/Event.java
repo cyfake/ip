@@ -7,4 +7,9 @@ public class Event extends Task {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.startTime, this.endTime);
+    }
 }
