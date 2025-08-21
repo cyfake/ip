@@ -58,6 +58,14 @@ public class Baymax {
                             Nice! I've marked this task as done:
                             \t""" + taskMark.getTask());
                     break;
+                case "unmark":
+                    index =  Integer.parseInt(parts[1]);
+                    Task taskUnmark = tasks.get(index - 1);
+                    taskUnmark.unmark();
+                    printMsg("""
+                            OK, I've marked this task as not done yet:
+                            \t""" + taskUnmark.getTask());
+                    break;
                 default:
                     addTask(input);
             }
