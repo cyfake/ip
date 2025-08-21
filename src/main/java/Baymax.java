@@ -39,14 +39,32 @@ public class Baymax {
                 \tI am here to help.""");
 
         String input = scanner.nextLine();
+        String[] parts = input.split(" ", 2);
 
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                printTasks();
-            } else {
-                addTask(input);
+        String command = parts[0];
+        int index;
+
+        while (!command.equals("bye")) {
+            switch (command) {
+                case "list":
+                    printTasks();
+                    break;
+                case "mark":
+                    index =  Integer.parseInt(parts[1]);
+                    Task taskMark = tasks.get(index - 1);
+                    taskMark.mark();
+
+                    printMsg("""
+                            Nice! I've marked this task as done:
+                            \t""" + taskMark.getTask());
+                    break;
+                default:
+                    addTask(input);
             }
             input = scanner.nextLine();
+            parts = input.split(" ",2);
+
+            command = parts[0];
         }
 
         printMsg("I will deactivate now.");
