@@ -15,11 +15,19 @@ public class Task {
         return String.format("[%s] %s", this.getStatus(), this.description);
     }
 
-    public void mark() {
+    public String mark() {
         this.isDone = true;
+
+        return """
+                Nice! I've marked this task as done:
+                \t""" + this.getTask();
     }
 
-    public void unmark() {
+    public String unmark() {
         this.isDone = false;
+
+        return """
+                OK, I've marked this task as not done yet:
+                \t""" + this.getTask();
     }
 }
