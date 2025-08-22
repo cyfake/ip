@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Baymax {
-    private static final String HORIZONTAL = "────────────────────────────────────────────────────────────";
+    private static final String HORIZONTAL = "────────────────────────────────────────────────────────────────────────";
     private static TaskList tasks = new TaskList();
 
     private static void printLine() {
@@ -93,5 +93,7 @@ public class Baymax {
 
         printMsg("I will deactivate now. " +
                 "I hope you are satisfied with my care.");
+
+        scanner.close();
     }
 }
