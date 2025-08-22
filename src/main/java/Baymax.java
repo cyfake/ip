@@ -30,37 +30,60 @@ public class Baymax {
         String[] str;
 
         while (!command.equals("bye")) {
-            switch (command) {
-                case "list":
-                    printMsg(tasks.toString());
-                    break;
-                case "mark":
-                    index = Integer.parseInt(parts[1]) - 1;
-                    printMsg(tasks.mark(index));
-                    break;
-                case "unmark":
-                    index = Integer.parseInt(parts[1]) - 1;
-                    printMsg(tasks.unmark(index));
-                    break;
-                case "todo":
-                    description = parts[1];
-                    printMsg(tasks.addTask(new ToDo(description)));
-                    break;
-                case "deadline":
-                    str = parts[1].split(" /by ", 2);
-                    description = str[0];
-                    String deadline = str[1];
-                    printMsg(tasks.addTask(new Deadline(description, deadline)));
-                    break;
-                case "event":
-                    str = parts[1].split(" /from | /to ");
-                    description = str[0];
-                    String start = str[1];
-                    String end = str[2];
-                    printMsg(tasks.addTask(new Event(description, start, end)));
-                    break;
-                default:
-                    printMsg("Unknown command.");
+
+            try {
+                switch (command) {
+                    case "list":
+                        printMsg(tasks.toString());
+                        break;
+                    case "mark":
+                        index = Integer.parseInt(parts[1]) - 1;
+                        printMsg(tasks.mark(index));
+                        break;
+                    case "unmark":
+                        index = Integer.parseInt(parts[1]) - 1;
+                        printMsg(tasks.unmark(index));
+                        break;
+                    case "todo":
+                        if (parts.length < 2) {
+                            throw new BaymaxException.MissingDescriptionException(command);
+                        }
+                        description = parts[1];
+                        printMsg(tasks.addTask(new ToDo(description)));
+                        break;
+                    case "deadline":
+                        if (parts.length < 2) {
+                            throw new BaymaxException.MissingDescriptionException(command);
+                        }
+                        str = parts[1].split(" /by ", 2);
+                        if (str.length < 2) {
+                            throw new BaymaxException.MissingDeadlineException();
+                        }
+                        description = str[0];
+                        String deadline = str[1];
+                        printMsg(tasks.addTask(new Deadline(description, deadline)));
+                        break;
+                    case "event":
+                        if (parts.length < 2) {
+                            throw new BaymaxException.MissingDescriptionException(command);
+                        }
+                        str = parts[1].split(" /from | /to ");
+                        if (str.length < 2) {
+                            throw new BaymaxException.MissingArgumentsException();
+                        }
+                        description = str[0];
+                        String start = str[1];
+                        String end = str[2];
+                        printMsg(tasks.addTask(new Event(description, start, end)));
+                        break;
+                    default:
+                        throw new BaymaxException.InvalidCommandException();
+                }
+            } catch (BaymaxException e) {
+                printMsg(e.getMessage());
+            } catch (NumberFormatException e) {
+                printMsg("Hmm… that does not appear to be a valid task number. " +
+                         "Please provide a whole number so I may help you.");
             }
 
             input = scanner.nextLine();
