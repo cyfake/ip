@@ -44,4 +44,20 @@ public class TaskList {
         }
         return this.tasks.get(index).unmark();
     }
+
+    public String delete(int index) throws BaymaxException.InvalidIndexException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new BaymaxException.InvalidIndexException(index);
+        }
+
+        Task task = tasks.get(index);
+        tasks.remove(index);
+
+        return String.format("""
+                Noted. I've removed this task:
+                \t\t %s
+                \tNow you have %d tasks in the list.""",
+                task,
+                this.tasks.size());
+    }
 }

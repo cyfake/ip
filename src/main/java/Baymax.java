@@ -44,6 +44,10 @@ public class Baymax {
                         index = Integer.parseInt(parts[1]) - 1;
                         printMsg(tasks.unmark(index));
                         break;
+                    case "delete":
+                        index = Integer.parseInt(parts[1]) - 1;
+                        printMsg(tasks.delete(index));
+                        break;
                     case "todo":
                         if (parts.length < 2) {
                             throw new BaymaxException.MissingDescriptionException(command);
