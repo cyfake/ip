@@ -13,21 +13,21 @@ public class BaymaxException extends Exception {
         public MissingDescriptionException(String command) {
             super(String.format(
                     "Pardon me. The \"%s\" command needs more details. " +
-                    "Please provide a description so I may assist you.", command));
+                            "Please provide a description so I may assist you.", command));
         }
     }
 
     public static class MissingDeadlineException extends BaymaxException {
         public MissingDeadlineException() {
             super("I am sorry, I could not find a deadline. " +
-                  "Please use: deadline <description> /by <deadline>.");
+                    "Please use: deadline <description> /by <deadline>.");
         }
     }
 
     public static class MissingArgumentsException extends BaymaxException {
         public MissingArgumentsException() {
             super("I am unable to schedule this event without full details. " +
-                  "Please use: event <description> /from <start> /to <end>.");
+                    "Please use: event <description> /from <start> /to <end>.");
         }
     }
 
@@ -35,7 +35,7 @@ public class BaymaxException extends Exception {
         public InvalidIndexException(int index) {
             super(String.format(
                     "I have scanned your task list, but I cannot find a task numbered %d. " +
-                    "Please check again.", index + 1));
+                            "Please check again.", index + 1));
         }
     }
 }

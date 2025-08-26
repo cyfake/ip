@@ -10,9 +10,9 @@ public class TaskList {
     public String addTask(Task task) {
         this.tasks.add(task);
         return String.format("""
-                Got it. I've added this task:
-                \t\t%s
-                \tNow you have %d tasks in the list.""",
+                        Got it. I've added this task:
+                        \t\t%s
+                        \tNow you have %d tasks in the list.""",
                 task,
                 tasks.size());
 
@@ -54,9 +54,9 @@ public class TaskList {
         tasks.remove(index);
 
         return String.format("""
-                Noted. I've removed this task:
-                \t\t %s
-                \tNow you have %d tasks in the list.""",
+                        Noted. I've removed this task:
+                        \t\t %s
+                        \tNow you have %d tasks in the list.""",
                 task,
                 this.tasks.size());
     }
