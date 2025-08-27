@@ -7,6 +7,10 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
+    public ArrayList<Task> getAll() {
+        return tasks;
+    }
+
     public String addTask(Task task) {
         this.tasks.add(task);
         return String.format("""
