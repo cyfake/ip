@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Baymax {
     private static final String HORIZONTAL = "────────────────────────────────────────────────────────────────────────";
-    private static TaskList tasks = new TaskList();
+    private static final String FILE_PATH = "./data/Baymax.txt";
 
     private static void printLine() {
         System.out.println("\t" + HORIZONTAL);
@@ -15,7 +16,15 @@ public class Baymax {
     }
 
     public static void main(String[] args) {
+        Storage storage = new Storage(FILE_PATH);
         Scanner scanner = new Scanner(System.in);
+        TaskList tasks = new TaskList();
+
+        try {
+            tasks = storage.load();
+        } catch (IOException e) {
+            System.out.println("Error loading tasks: " + e.getMessage());
+        }
 
         printMsg("""
                 Hello! I am Baymax, your personal chatbot companion.
@@ -30,7 +39,6 @@ public class Baymax {
         String[] str;
 
         while (!command.equals("bye")) {
-
             try {
                 switch (command) {
                 case "list":
@@ -53,7 +61,7 @@ public class Baymax {
                         throw new BaymaxException.MissingDescriptionException(command);
                     }
                     description = parts[1];
-                    printMsg(tasks.addTask(new ToDo(description)));
+                    printMsg(tasks.addTask(new ToDo(false, description)));
                     break;
                 case "deadline":
                     if (parts.length < 2) {
@@ -65,7 +73,7 @@ public class Baymax {
                     }
                     description = str[0];
                     String deadline = str[1];
-                    printMsg(tasks.addTask(new Deadline(description, deadline)));
+                    printMsg(tasks.addTask(new Deadline(false, description, deadline)));
                     break;
                 case "event":
                     if (parts.length < 2) {
@@ -78,7 +86,7 @@ public class Baymax {
                     description = str[0];
                     String start = str[1];
                     String end = str[2];
-                    printMsg(tasks.addTask(new Event(description, start, end)));
+                    printMsg(tasks.addTask(new Event(false, description, start, end)));
                     break;
                 default:
                     throw new BaymaxException.InvalidCommandException();
@@ -88,6 +96,12 @@ public class Baymax {
             } catch (NumberFormatException e) {
                 printMsg("Hmm… that does not appear to be a valid task number. " +
                         "Please provide a whole number so I may help you.");
+            }
+
+            try {
+                storage.save(tasks);
+            } catch (IOException e) {
+                System.out.println("Error saving tasks: " + e.getMessage());
             }
 
             input = scanner.nextLine();

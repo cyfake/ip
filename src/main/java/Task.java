@@ -2,9 +2,9 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(boolean isDone, String description) {
+        this.isDone = isDone;
         this.description = description;
-        this.isDone = false;
     }
 
     public String getStatus() {
@@ -31,4 +31,28 @@ public abstract class Task {
                 I have unmarked this task.
                 \t""" + this;
     }
+
+    public static Task toTaskFormat(String line) {
+        String[] parts = line.split(" \\| ");
+
+        String taskType = parts[0];
+        boolean isDone = Boolean.parseBoolean(parts[1]);
+        String description = parts[2];
+
+        return switch (taskType) {
+            case "T":
+                yield new ToDo(isDone, description);
+            case "D":
+                String deadline = parts[3];
+                yield new Deadline(isDone, description, deadline);
+            case "E":
+                String startTime = parts[3];
+                String endTime = parts[4];
+                yield new Event(isDone, description, startTime, endTime);
+            default:
+                yield new ToDo(false, "test");
+        };
+    }
+
+    public abstract String toSaveFormat();
 }
