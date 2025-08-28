@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Baymax {
@@ -73,7 +75,14 @@ public class Baymax {
                     }
                     description = str[0];
                     String deadline = str[1];
-                    printMsg(tasks.addTask(new Deadline(false, description, deadline)));
+
+                    try {
+                        LocalDate date = LocalDate.parse(deadline);
+                        printMsg(tasks.addTask(new Deadline(false, description, date)));
+                    } catch (DateTimeParseException e) {
+                        printMsg("I detect a formatting error. For optimal results, input your " +
+                                "deadline like this: yyyy-MM-dd (e.g 2025-08-05). I will wait right here.");
+                    }
                     break;
                 case "event":
                     if (parts.length < 2) {

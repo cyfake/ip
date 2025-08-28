@@ -26,10 +26,10 @@ public class TaskList {
     public String toString() {
         StringBuilder str = new StringBuilder("""
                 Here are the tasks I found in your list.
-                \tLet’s take care of them together:\n""");
+                \tLet’s take care of them together:""");
 
         for (int i = 0; i < tasks.size(); i++) {
-            str.append("\t%d. %s\n".formatted(i + 1, tasks.get(i)));
+            str.append("\n\t%d. %s".formatted(i + 1, tasks.get(i)));
         }
 
         return str.toString();
