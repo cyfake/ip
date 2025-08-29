@@ -4,123 +4,48 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Baymax {
-    private static final String HORIZONTAL = "────────────────────────────────────────────────────────────────────────";
-    private static final String FILE_PATH = "./data/Baymax.txt";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    private static void printLine() {
-        System.out.println("\t" + HORIZONTAL);
-    }
-
-    private static void printMsg(String msg) {
-        printLine();
-        System.out.println("\t" + msg);
-        printLine();
-    }
-
-    public static void main(String[] args) {
-        Storage storage = new Storage(FILE_PATH);
-        Scanner scanner = new Scanner(System.in);
-        TaskList tasks = new TaskList();
+    public Baymax(String filePath) {
+        this.storage = new Storage(filePath);
+        this.tasks = new TaskList();
+        this.ui = new Ui();
 
         try {
             tasks = storage.load();
         } catch (IOException e) {
-            System.out.println("Error loading tasks: " + e.getMessage());
+            ui.printMsg("Error loading tasks: " + e.getMessage());
         }
+    }
 
-        printMsg("""
-                Hello! I am Baymax, your personal chatbot companion.
-                \tI am here to help.""");
+    public void run() {
+        this.ui.greet();
 
-        String input = scanner.nextLine();
-        String[] parts = input.split(" ", 2);
+        boolean isExit = false;
 
-        String command = parts[0];
-        int index;
-        String description;
-        String[] str;
-
-        while (!command.equals("bye")) {
+        while (!isExit) {
             try {
-                switch (command) {
-                case "list":
-                    printMsg(tasks.toString());
-                    break;
-                case "mark":
-                    index = Integer.parseInt(parts[1]) - 1;
-                    printMsg(tasks.mark(index));
-                    break;
-                case "unmark":
-                    index = Integer.parseInt(parts[1]) - 1;
-                    printMsg(tasks.unmark(index));
-                    break;
-                case "delete":
-                    index = Integer.parseInt(parts[1]) - 1;
-                    printMsg(tasks.delete(index));
-                    break;
-                case "todo":
-                    if (parts.length < 2) {
-                        throw new BaymaxException.MissingDescriptionException(command);
-                    }
-                    description = parts[1];
-                    printMsg(tasks.addTask(new ToDo(false, description)));
-                    break;
-                case "deadline":
-                    if (parts.length < 2) {
-                        throw new BaymaxException.MissingDescriptionException(command);
-                    }
-                    str = parts[1].split(" /by ", 2);
-                    if (str.length < 2) {
-                        throw new BaymaxException.MissingDeadlineException();
-                    }
-                    description = str[0];
-                    String deadline = str[1];
-
-                    try {
-                        LocalDate date = LocalDate.parse(deadline);
-                        printMsg(tasks.addTask(new Deadline(false, description, date)));
-                    } catch (DateTimeParseException e) {
-                        printMsg("I detect a formatting error. For optimal results, input your " +
-                                "deadline like this: yyyy-MM-dd (e.g 2025-08-05). I will wait right here.");
-                    }
-                    break;
-                case "event":
-                    if (parts.length < 2) {
-                        throw new BaymaxException.MissingDescriptionException(command);
-                    }
-                    str = parts[1].split(" /from | /to ");
-                    if (str.length < 2) {
-                        throw new BaymaxException.MissingArgumentsException();
-                    }
-                    description = str[0];
-                    String start = str[1];
-                    String end = str[2];
-                    printMsg(tasks.addTask(new Event(false, description, start, end)));
-                    break;
-                default:
-                    throw new BaymaxException.InvalidCommandException();
-                }
+                Command command = Parser.parse(ui.read());
+                command.execute(tasks, ui);
+                isExit = command.isExit();
             } catch (BaymaxException e) {
-                printMsg(e.getMessage());
+                ui.printMsg(e.getMessage());
             } catch (NumberFormatException e) {
-                printMsg("Hmm… that does not appear to be a valid task number. " +
+                ui.printMsg("Hmm… that does not appear to be a valid task number. " +
                         "Please provide a whole number so I may help you.");
             }
 
             try {
                 storage.save(tasks);
             } catch (IOException e) {
-                System.out.println("Error saving tasks: " + e.getMessage());
+                ui.printMsg("Error saving tasks: " + e.getMessage());
             }
-
-            input = scanner.nextLine();
-            parts = input.split(" ", 2);
-            command = parts[0];
         }
+    }
 
-        printMsg("I will deactivate now. " +
-                "I hope you are satisfied with my care.");
-
-        scanner.close();
+    public static void main(String[] args) {
+        new Baymax("./data/Baymax.txt").run();
     }
 }
