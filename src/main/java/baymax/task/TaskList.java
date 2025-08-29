@@ -100,6 +100,17 @@ public class TaskList {
                 this.tasks.size());
     }
 
+    /**
+     * Searches the task list for tasks whose description contains the given keyword.
+     * <p>
+     * If one or more matches are found, they are returned in a numbered list.
+     * If no matches are found, a message is returned instead.
+     * </p>
+     *
+     * @param keyword The keyword to search for within task descriptions.
+     * @return A message listing the matching tasks,
+     *         or a plain message if no matches were found.
+     */
     public String find(String keyword) {
         StringBuilder str = new StringBuilder("""
                 I have scanned your list and found these tasks for you:""");
