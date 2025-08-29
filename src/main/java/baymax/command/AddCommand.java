@@ -10,6 +10,12 @@ import baymax.task.ToDo;
 
 import baymax.ui.Ui;
 
+/**
+ * Represents a command that adds a new task to the task list.
+ * <p>
+ * The task can be a {@link ToDo}, {@link Deadline}, or {@link Event}.
+ * </p>
+ */
 public class AddCommand extends Command {
 
     private Task task;
@@ -18,18 +24,45 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Creates an {@code AddCommand} for a {@link ToDo} task.
+     *
+     * @param description The description of the to-do task.
+     * @return A new {@code AddCommand} that will add the to-do task.
+     */
     public static AddCommand todo(String description) {
         return new AddCommand(new ToDo(false, description));
     }
 
+    /**
+     * Creates an {@code AddCommand} for a {@link Deadline} task.
+     *
+     * @param description The description of the deadline task.
+     * @param deadline The due date of the deadline task.
+     * @return A new {@code AddCommand} that will add the deadline task.
+     */
     public static AddCommand deadline(String description, LocalDate deadline) {
         return new AddCommand(new Deadline(false, description, deadline));
     }
 
+    /**
+     * Creates an {@code AddCommand} for an {@link Event} task.
+     *
+     * @param description The description of the event.
+     * @param start The start time of the event.
+     * @param end The end time of the event.
+     * @return A new {@code AddCommand} that will add the event task.
+     */
     public static AddCommand event(String description, String start, String end) {
         return new AddCommand(new Event(false, description, start, end));
     }
 
+    /**
+     * Executes the add command by adding the task into the task list.
+     *
+     * @param tasks The task list to add the task into.
+     * @param ui The user interface for displaying output messages.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui) {
         ui.printMsg(tasks.addTask(this.task));
