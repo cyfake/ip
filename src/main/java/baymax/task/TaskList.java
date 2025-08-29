@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import baymax.exception.BaymaxException;
 
+/**
+ * A mutable collection of {@link Task} objects with convenience methods
+ * for listing, adding, updating, and deleting tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -15,6 +19,12 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Adds a task to the list and returns a confirmation message.
+     *
+     * @param task The task to add.
+     * @return A confirmation string including the task and count.
+     */
     public String addTask(Task task) {
         this.tasks.add(task);
         return String.format("""
@@ -39,6 +49,13 @@ public class TaskList {
         return str.toString();
     }
 
+    /**
+     * Marks the task at the provided index and returns a confirmation message.
+     *
+     * @param index The 0-based index of the task to mark.
+     * @return A confirmation string including the task.
+     * @throws BaymaxException.InvalidIndexException If the index is out of bounds.
+     */
     public String mark(int index) throws BaymaxException.InvalidIndexException {
         if (index < 0 || index >= tasks.size()) {
             throw new BaymaxException.InvalidIndexException(index);
@@ -46,6 +63,13 @@ public class TaskList {
         return this.tasks.get(index).mark();
     }
 
+    /**
+     * Unmarks the task at the provided index and returns a confirmation message.
+     *
+     * @param index The 0-based index of the task to unmark.
+     * @return A confirmation string including the task.
+     * @throws BaymaxException.InvalidIndexException If the index is out of bounds.
+     */
     public String unmark(int index) throws BaymaxException.InvalidIndexException {
         if (index < 0 || index >= tasks.size()) {
             throw new BaymaxException.InvalidIndexException(index);
@@ -53,6 +77,13 @@ public class TaskList {
         return this.tasks.get(index).unmark();
     }
 
+    /**
+     * Deletes the task at the provided index and returns a confirmation message.
+     *
+     * @param index The 0-based index of the task to delete.
+     * @return A confirmation string including the removed task.
+     * @throws BaymaxException.InvalidIndexException If the index is out of bounds.
+     */
     public String delete(int index) throws BaymaxException.InvalidIndexException {
         if (index < 0 || index >= tasks.size()) {
             throw new BaymaxException.InvalidIndexException(index);

@@ -1,5 +1,12 @@
 package baymax.task;
 
+/**
+ * Represents a task that spans a start and end time.
+ *
+ * <p>
+ * Displays itself with an {@code [E]} tag and its time range.
+ * </p>
+ */
 public class Event extends Task {
     protected String startTime;
     protected String endTime;
