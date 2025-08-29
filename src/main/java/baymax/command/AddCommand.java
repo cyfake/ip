@@ -1,4 +1,14 @@
+package baymax.command;
+
 import java.time.LocalDate;
+
+import baymax.task.Deadline;
+import baymax.task.Event;
+import baymax.task.Task;
+import baymax.task.TaskList;
+import baymax.task.ToDo;
+
+import baymax.ui.Ui;
 
 public class AddCommand extends Command {
 

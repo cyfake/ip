@@ -1,3 +1,11 @@
+package baymax.command;
+
+import baymax.exception.BaymaxException;
+
+import baymax.task.TaskList;
+
+import baymax.ui.Ui;
+
 public class UpdateCommand extends Command {
 
     private String type;
