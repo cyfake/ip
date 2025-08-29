@@ -11,12 +11,36 @@ import baymax.command.UpdateCommand;
 
 import baymax.exception.BaymaxException;
 
+/**
+ * Parses raw user input into executable {@link Command} objects.
+ * <p>
+ * The parser interprets text-based commands entered by the user
+ * and maps them to the corresponding command classes. It also validates
+ * command arguments and throws exceptions for invalid inputs.
+ * </p>
+ */
 public class Parser {
 
+    /**
+     * Parses the index argument from a command input.
+     *
+     * @param arr The array of command tokens.
+     * @return The task index.
+     * @throws NumberFormatException If the index cannot be parsed as an integer.
+     *
+     */
     private static int parseIndex(String[] arr) {
         return Integer.parseInt(arr[1]) - 1;
     }
 
+    /**
+     * Ensures that the given command has the required arguments.
+     *
+     * @param command The command being validated.
+     * @param args The command arguments split from the input.
+     * @return The same {@code args} array if valid.
+     * @throws BaymaxException.MissingDescriptionException If no description is provided.
+     */
     private static String[] requireArgs(String command, String[] args) throws BaymaxException {
         if (args.length < 2) {
             throw new BaymaxException.MissingDescriptionException(command);
@@ -24,6 +48,14 @@ public class Parser {
         return args;
     }
 
+    /**
+     * Parses the user input and returns the corresponding {@link Command}.
+     *
+     * @param input The raw user input string.
+     * @return A {@link Command} object that, when executed, performs the action described by the input.
+     * @throws BaymaxException If the input is invalid, missing arguments, or contains
+     *                         invalid dates or indices.
+     */
     public static Command parse(String input) throws BaymaxException {
         String[] parts = input.split(" ", 2);
         String command = parts[0];
