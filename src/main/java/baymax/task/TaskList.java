@@ -68,4 +68,28 @@ public class TaskList {
                 task,
                 this.tasks.size());
     }
+
+    public String find(String keyword) {
+        StringBuilder str = new StringBuilder("""
+                I have scanned your list and found these tasks for you:""");
+
+        int count = 0;
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+
+            if (task.description.contains(keyword)) {
+                str.append("\n\t%d. %s".formatted(count + 1, task));
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            return """
+                I scanned your list thoroughly, but I could not find any tasks matching your request.
+                \tDo not worry, I am still here to assist you.""";
+        }
+
+        return str.toString();
+    }
 }

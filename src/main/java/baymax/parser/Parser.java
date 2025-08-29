@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import baymax.command.AddCommand;
 import baymax.command.Command;
 import baymax.command.ExitCommand;
+import baymax.command.FindCommand;
 import baymax.command.ListCommand;
 import baymax.command.UpdateCommand;
 
@@ -66,6 +67,9 @@ public class Parser {
             String end = str[2];
 
             return AddCommand.event(description, start, end);
+        case "find":
+            String keyword = requireArgs(command, parts)[1];
+            return new FindCommand(keyword);
         case "bye":
             return new ExitCommand();
         default:
