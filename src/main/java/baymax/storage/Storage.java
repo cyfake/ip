@@ -1,7 +1,13 @@
+package baymax.storage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
+
+import baymax.task.Task;
+import baymax.task.TaskList;
 
 public class Storage {
     private String filePath;

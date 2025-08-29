@@ -1,5 +1,15 @@
+package baymax.parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import baymax.command.AddCommand;
+import baymax.command.Command;
+import baymax.command.ExitCommand;
+import baymax.command.ListCommand;
+import baymax.command.UpdateCommand;
+
+import baymax.exception.BaymaxException;
 
 public class Parser {
 
