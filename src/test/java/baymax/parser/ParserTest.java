@@ -2,8 +2,6 @@ package baymax.parser;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 import baymax.command.AddCommand;
