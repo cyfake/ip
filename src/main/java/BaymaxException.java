@@ -38,4 +38,11 @@ public class BaymaxException extends Exception {
                             "Please check again.", index + 1));
         }
     }
+
+    public static class InvalidDateException extends BaymaxException {
+        public InvalidDateException() {
+            super("I detect a formatting error. For optimal results, input your deadline " +
+                    "like this: yyyy-MM-dd (e.g 2025-08-05). I will wait right here.");
+        }
+    }
 }
