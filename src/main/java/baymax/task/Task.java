@@ -72,19 +72,19 @@ public abstract class Task {
         boolean isDone = Boolean.parseBoolean(parts[1]);
         String description = parts[2];
 
-        return switch (taskType) {
-            case "T":
-                yield new ToDo(isDone, description);
-            case "D":
-                LocalDate deadline = LocalDate.parse(parts[3]);
-                yield new Deadline(isDone, description, deadline);
-            case "E":
-                String startTime = parts[3];
-                String endTime = parts[4];
-                yield new Event(isDone, description, startTime, endTime);
-            default:
-                yield new ToDo(false, "test");
-        };
+        switch (taskType) {
+        case "T":
+            return new ToDo(isDone, description);
+        case "D":
+            LocalDate deadline = LocalDate.parse(parts[3]);
+            return new Deadline(isDone, description, deadline);
+        case "E":
+            String startTime = parts[3];
+            String endTime = parts[4];
+            return new Event(isDone, description, startTime, endTime);
+        default:
+            return new ToDo(false, "test");
+        }
     }
 
     /**
