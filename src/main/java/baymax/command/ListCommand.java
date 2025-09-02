@@ -1,7 +1,6 @@
 package baymax.command;
 
 import baymax.task.TaskList;
-
 import baymax.ui.Ui;
 
 /**

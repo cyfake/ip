@@ -37,8 +37,8 @@ public class Baymax {
             } catch (BaymaxException e) {
                 ui.printMsg(e.getMessage());
             } catch (NumberFormatException e) {
-                ui.printMsg("Hmm… that does not appear to be a valid task number. " +
-                        "Please provide a whole number so I may help you.");
+                ui.printMsg("Hmm… that does not appear to be a valid task number. "
+                        + "Please provide a whole number so I may help you.");
             }
 
             try {
