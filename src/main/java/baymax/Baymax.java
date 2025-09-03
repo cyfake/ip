@@ -1,3 +1,5 @@
+package baymax;
+
 import java.io.IOException;
 
 import baymax.command.Command;
@@ -50,6 +52,13 @@ public class Baymax {
     }
 
     public static void main(String[] args) {
-        new Baymax("./data/Baymax.txt").run();
+        new Baymax("./data/baymax.Baymax.txt").run();
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "Baymax heard: " + input;
     }
 }

@@ -5,7 +5,7 @@ import baymax.task.TaskList;
 import baymax.ui.Ui;
 
 /**
- * Represents a user command that can be executed in the Baymax application.
+ * Represents a user command that can be executed in the baymax.Baymax application.
  */
 public abstract class Command {
     /**
