@@ -7,7 +7,6 @@ import baymax.task.Event;
 import baymax.task.Task;
 import baymax.task.TaskList;
 import baymax.task.ToDo;
-import baymax.ui.Ui;
 
 /**
  * Represents a command that adds a new task to the task list.
@@ -57,13 +56,14 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the add command by adding the task into the task list.
+     * Executes the add command by inserting the specified task into the given task list.
      *
-     * @param tasks The task list to add the task into.
-     * @param ui The user interface for displaying output messages.
+     * @param tasks The {@link TaskList} to which the task will be added.
+     * @return A confirmation message indicating that the task has been
+     *         added, along with the updated number of tasks in the list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.printMsg(tasks.addTask(this.task));
+    public String execute(TaskList tasks) {
+        return tasks.addTask(this.task);
     }
 }

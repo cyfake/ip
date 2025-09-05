@@ -1,5 +1,8 @@
 package baymax;
 
+import java.io.IOException;
+
+import baymax.ui.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for the main GUI.
  */
@@ -28,15 +32,26 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        dialogContainer.getChildren().add(
+                DialogBox.getBaymaxDialog("Hello! I am Baymax, your personal chatbot companion. "
+                        + "\nI am here to help.", baymaxImage));
     }
 
-    /** Injects the Duke instance */
-    public void setBaymax(Baymax d) {
-        baymax = d;
+    /** Injects the Baymax instance */
+    public void setBaymax(Baymax baymax) {
+        this.baymax = baymax;
+        try {
+            baymax.start();
+        } catch (IOException e) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getBaymaxDialog("Error loading tasks: " + e.getMessage(), baymaxImage)
+            );
+        }
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Baymax's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

@@ -1,6 +1,7 @@
 package baymax.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,56 +31,50 @@ public class ParserTest {
     @Test
     public void parseCommand_unknownCommand_exceptionThrown() {
         assertThrows(
-                BaymaxException.InvalidCommandException.class,
-                () -> Parser.parse("hi")
+                BaymaxException.InvalidCommandException.class, () -> Parser.parse("hi")
         );
     }
 
     @Test
     public void todoCommand_missingDescription_exceptionThrown() {
         assertThrows(
-                BaymaxException.MissingDescriptionException.class,
-                () -> Parser.parse("todo")
+                BaymaxException.MissingDescriptionException.class, () -> Parser.parse("todo")
         );
     }
 
     @Test
     public void deadlineCommand_missingDescription_exceptionThrown() {
         assertThrows(
-                BaymaxException.MissingDescriptionException.class,
-                () -> Parser.parse("deadline")
+                BaymaxException.MissingDescriptionException.class, () -> Parser.parse("deadline")
         );
     }
 
     @Test
     public void deadlineCommand_missingDeadline_exceptionThrown() {
         assertThrows(
-                BaymaxException.MissingDeadlineException.class,
-                () -> Parser.parse("deadline complete homework /by")
+                BaymaxException.MissingDeadlineException.class, () -> Parser.parse("deadline complete homework /by")
         );
     }
 
     @Test
     public void deadlineCommand_invalidDeadline_exceptionThrown() {
         assertThrows(
-                BaymaxException.InvalidDateException.class,
-                () -> Parser.parse("deadline complete homework /by tomorrow")
+                BaymaxException.InvalidDateException.class, () -> Parser.parse(
+                        "deadline complete homework /by tomorrow")
         );
     }
 
     @Test
     public void eventCommand_missingDescription_exceptionThrown() {
         assertThrows(
-                BaymaxException.MissingDescriptionException.class,
-                () -> Parser.parse("event")
+                BaymaxException.MissingDescriptionException.class, () -> Parser.parse("event")
         );
     }
 
     @Test
     public void eventCommand_missingArguments_exceptionThrown() {
         assertThrows(
-                BaymaxException.MissingArgumentsException.class,
-                () -> Parser.parse("event dinner /from")
+                BaymaxException.MissingArgumentsException.class, () -> Parser.parse("event dinner /from")
         );
     }
 }

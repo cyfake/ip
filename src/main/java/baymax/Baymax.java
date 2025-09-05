@@ -7,58 +7,47 @@ import baymax.exception.BaymaxException;
 import baymax.parser.Parser;
 import baymax.storage.Storage;
 import baymax.task.TaskList;
-import baymax.ui.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
 
 public class Baymax {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     public Baymax(String filePath) {
         this.storage = new Storage(filePath);
         this.tasks = new TaskList();
-        this.ui = new Ui();
-
-        try {
-            tasks = storage.load();
-        } catch (IOException e) {
-            ui.printMsg("Error loading tasks: " + e.getMessage());
-        }
     }
 
-    public void run() {
-        this.ui.greet();
+    public void start() throws IOException {
+        tasks = storage.load();
+    }
 
-        boolean isExit = false;
+    /**
+     * Generates a response for the user's message.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
 
-        while (!isExit) {
-            try {
-                Command command = Parser.parse(ui.read());
-                command.execute(tasks, ui);
-                isExit = command.isExit();
-            } catch (BaymaxException e) {
-                ui.printMsg(e.getMessage());
-            } catch (NumberFormatException e) {
-                ui.printMsg("Hmm… that does not appear to be a valid task number. "
-                        + "Please provide a whole number so I may help you.");
+            if (command.isExit()) {
+                PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+                delay.setOnFinished(event -> Platform.exit());
+                delay.play();
             }
 
             try {
                 storage.save(tasks);
             } catch (IOException e) {
-                ui.printMsg("Error saving tasks: " + e.getMessage());
+                return "Error saving tasks: " + e.getMessage();
             }
+            return command.execute(tasks);
+        } catch (BaymaxException e) {
+            return e.getMessage();
+        } catch (NumberFormatException e) {
+            return "Hmm… that does not appear to be a valid task number. "
+                    + "Please provide a whole number so I may help you.";
         }
-    }
-
-    public static void main(String[] args) {
-        new Baymax("./data/baymax.Baymax.txt").run();
-    }
-
-    /**
-     * Generates a response for the user's chat message.
-     */
-    public String getResponse(String input) {
-        return "Baymax heard: " + input;
     }
 }

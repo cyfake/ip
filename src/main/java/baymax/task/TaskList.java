@@ -40,7 +40,7 @@ public class TaskList {
     public String toString() {
         StringBuilder str = new StringBuilder("""
                 Here are the tasks I found in your list.
-                \tLet’s take care of them together:""");
+                Let’s take care of them together:""");
 
         for (int i = 0; i < tasks.size(); i++) {
             str.append("\n\t%d. %s".formatted(i + 1, tasks.get(i)));
@@ -94,8 +94,8 @@ public class TaskList {
 
         return String.format("""
                         Noted. I've removed this task:
-                        \t\t %s
-                        \tNow you have %d tasks in the list.""",
+                        \t%s
+                        Now you have %d tasks in the list.""",
                 task,
                 this.tasks.size());
     }
@@ -129,7 +129,7 @@ public class TaskList {
         if (count == 0) {
             return """
                 I scanned your list thoroughly, but I could not find any tasks matching your request.
-                \tDo not worry, I am still here to assist you.""";
+                Do not worry, I am still here to assist you.""";
         }
 
         return str.toString();

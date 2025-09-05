@@ -1,7 +1,6 @@
 package baymax.command;
 
 import baymax.task.TaskList;
-import baymax.ui.Ui;
 
 /**
  * Represents a command that searches the task list for tasks
@@ -15,14 +14,15 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the find command by scanning the task list for matches
-     * and printing the results through the user interface.
+     * Executes the find command by searching the given task list for tasks
+     * whose descriptions contain the specified keyword.
      *
-     * @param tasks The task list to search through.
-     * @param ui The user interface for displaying matching tasks.
+     * @param tasks The {@link TaskList} to search through.
+     * @return A formatted string containing the matching tasks, or a message
+     *         indicating that no matches were found.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.printMsg(tasks.find(this.keyword));
+    public String execute(TaskList tasks) {
+        return tasks.find(this.keyword);
     }
 }

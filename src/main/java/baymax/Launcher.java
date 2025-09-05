@@ -1,5 +1,6 @@
 package baymax;
 
+import baymax.ui.Main;
 import javafx.application.Application;
 
 /**

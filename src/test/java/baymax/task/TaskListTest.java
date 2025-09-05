@@ -1,9 +1,11 @@
 package baymax.task;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 import baymax.exception.BaymaxException;
-import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
 
@@ -71,8 +73,7 @@ public class TaskListTest {
         TaskList tasks = new TaskList();
 
         assertThrows(
-                BaymaxException.InvalidIndexException.class,
-                () -> tasks.mark(0));
+                BaymaxException.InvalidIndexException.class, () -> tasks.mark(0));
     }
 
     @Test
@@ -89,8 +90,7 @@ public class TaskListTest {
         TaskList tasks = new TaskList();
 
         assertThrows(
-                BaymaxException.InvalidIndexException.class,
-                () -> tasks.unmark(0));
+                BaymaxException.InvalidIndexException.class, () -> tasks.unmark(0));
     }
 
     @Test
@@ -102,8 +102,8 @@ public class TaskListTest {
 
         assertEquals("""
                         Noted. I've removed this task:
-                        \t\t [ ] baymax
-                        \tNow you have 0 tasks in the list.""",
+                        \t[ ] baymax
+                        Now you have 0 tasks in the list.""",
                 tasks.delete(0));
         assertEquals(0, tasks.getAll().size());
     }
@@ -113,7 +113,6 @@ public class TaskListTest {
         TaskList tasks = new TaskList();
 
         assertThrows(
-                BaymaxException.InvalidIndexException.class,
-                () -> tasks.delete(0));
+                BaymaxException.InvalidIndexException.class, () -> tasks.delete(0));
     }
 }
