@@ -1,22 +1,23 @@
 package baymax.command;
 
 import baymax.task.TaskList;
-import baymax.ui.Ui;
 
 /**
  * Represents a command that terminates the Baymax chatbot.
  */
 public class ExitCommand extends Command {
     /**
-     * Executes the exit command by displaying a farewell message.
+     * Executes the exit command, which signals that the application should terminate,
+     * and returns Baymax's farewell message.
      *
-     * @param tasks The task list (not used in this command).
-     * @param ui The user interface for displaying the farewell message.
+     * @param tasks The {@link TaskList}, unused by this command.
+     * @return A farewell message.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.bye();
+    public String execute(TaskList tasks) {
+        return "I will deactivate now. I hope you are satisfied with my care.";
     }
+
 
     /**
      * Indicates that this command will terminate the program.

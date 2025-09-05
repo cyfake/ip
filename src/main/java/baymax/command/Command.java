@@ -2,20 +2,19 @@ package baymax.command;
 
 import baymax.exception.BaymaxException;
 import baymax.task.TaskList;
-import baymax.ui.Ui;
 
 /**
- * Represents a user command that can be executed in the Baymax application.
+ * Represents a user command that can be executed in the baymax.Baymax application.
  */
 public abstract class Command {
     /**
      * Executes the command using the provided task list and user interface.
      *
      * @param tasks The {@link TaskList} containing the user's tasks.
-     * @param ui The {@link Ui} for displaying output messages to the user.
+     * @return A formatted message describing the result of executing the command.
      * @throws BaymaxException If the command cannot be executed successfully.
      */
-    public abstract void execute(TaskList tasks, Ui ui) throws BaymaxException;
+    public abstract String execute(TaskList tasks) throws BaymaxException;
 
     /**
      * Determines whether this command should terminate the program.
