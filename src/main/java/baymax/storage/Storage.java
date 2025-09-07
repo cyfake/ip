@@ -19,9 +19,7 @@ public class Storage {
         File file = new File(filePath);
 
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-            return new TaskList();
+            return initialise(file);
         }
 
         TaskList tasks = new TaskList();
@@ -44,5 +42,11 @@ public class Storage {
         }
 
         writer.close();
+    }
+
+    private TaskList initialise(File file) throws IOException {
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+        return new TaskList();
     }
 }
