@@ -39,6 +39,11 @@ public class BaymaxException extends Exception {
                     "I have scanned your task list, but I cannot find a task numbered %d. "
                             + "Please check again.", index + 1));
         }
+
+        public InvalidIndexException() {
+            super("I have scanned your task list, but that is an invalid argument. "
+                            + "Please use: mark <index>.");
+        }
     }
 
     public static class InvalidDateException extends BaymaxException {
