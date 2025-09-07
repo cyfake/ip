@@ -14,6 +14,7 @@ import javafx.util.Duration;
 public class Baymax {
     private Storage storage;
     private TaskList tasks;
+    private double EXIT_DELAY = 1.5;
 
     public Baymax(String filePath) {
         this.storage = new Storage(filePath);
@@ -25,7 +26,7 @@ public class Baymax {
     }
 
     private void exit() {
-        PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+        PauseTransition delay = new PauseTransition(Duration.seconds(EXIT_DELAY));
         delay.setOnFinished(event -> Platform.exit());
         delay.play();
     }
