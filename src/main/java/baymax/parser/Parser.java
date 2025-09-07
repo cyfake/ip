@@ -30,6 +30,7 @@ public class Parser {
      *
      */
     private static int parseIndex(String[] arr) {
+        assert arr.length >= 2 : "Index argument missing";
         return Integer.parseInt(arr[1]) - 1;
     }
 
@@ -66,6 +67,9 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "mark", "unmark", "delete":
+            if (parts.length < 2) {
+                throw new BaymaxException.InvalidIndexException();
+            }
             return new UpdateCommand(command, parseIndex(parts));
         case "todo":
             description = requireArgs(command, parts)[1];
