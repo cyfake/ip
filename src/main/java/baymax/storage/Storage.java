@@ -21,6 +21,7 @@ public class Storage {
         if (!file.exists()) {
             file.getParentFile().mkdirs();
             file.createNewFile();
+            assert file.exists() : "File should exist after being created";
             return new TaskList();
         }
 
@@ -28,7 +29,9 @@ public class Storage {
         Scanner sc = new Scanner(file);
 
         while (sc.hasNext()) {
-            tasks.addTask(Task.toTaskFormat(sc.nextLine()));
+            Task task = Task.toTaskFormat(sc.nextLine());
+            assert task != null : "Task parsing returned null";
+            tasks.addTask(task);
         }
 
         sc.close();
@@ -40,6 +43,7 @@ public class Storage {
         FileWriter writer = new FileWriter(filePath);
 
         for (Task task : tasks.getAll()) {
+            assert task != null : "Task in TaskList should not be null";
             writer.write(task.toSaveFormat() + "\n");
         }
 
