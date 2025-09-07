@@ -14,6 +14,7 @@ import javafx.util.Duration;
 public class Baymax {
     private Storage storage;
     private TaskList tasks;
+    private double EXIT_DELAY = 1.5;
 
     public Baymax(String filePath) {
         this.storage = new Storage(filePath);
@@ -24,25 +25,32 @@ public class Baymax {
         tasks = storage.load();
     }
 
+    private void exit() {
+        PauseTransition delay = new PauseTransition(Duration.seconds(EXIT_DELAY));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
+    }
+
     /**
      * Generates a response for the user's message.
      */
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-
-            if (command.isExit()) {
-                PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
-                delay.setOnFinished(event -> Platform.exit());
-                delay.play();
-            }
+            String response = command.execute(tasks);
 
             try {
                 storage.save(tasks);
             } catch (IOException e) {
                 return "Error saving tasks: " + e.getMessage();
             }
-            return command.execute(tasks);
+
+            if (command.isExit()) {
+                exit();
+            }
+
+            return response;
+
         } catch (BaymaxException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {

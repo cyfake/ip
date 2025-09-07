@@ -42,7 +42,7 @@ public class Parser {
      * @return The same {@code args} array if valid.
      * @throws BaymaxException.MissingDescriptionException If no description is provided.
      */
-    private static String[] requireArgs(String command, String[] args) throws BaymaxException {
+    private static String[] requireArgs(String command, String... args) throws BaymaxException {
         if (args.length < 2) {
             throw new BaymaxException.MissingDescriptionException(command);
         }
