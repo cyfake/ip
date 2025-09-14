@@ -34,6 +34,9 @@ public abstract class Task {
      * @return A confirmation string including the task.
      */
     public String mark() {
+        if (this.isDone) {
+            return "This task is already completed. There is no further action required.";
+        }
         this.isDone = true;
 
         return """
@@ -47,6 +50,9 @@ public abstract class Task {
      * @return A confirmation string including the task.
      */
     public String unmark() {
+        if (!this.isDone) {
+            return "This task is already unmarked. No further changes are necessary.";
+        }
         this.isDone = false;
 
         return """
