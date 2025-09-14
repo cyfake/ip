@@ -30,6 +30,14 @@ I primarily used **ChatGPT (OpenAI GPT-5)** to assist with writing and refining 
 
 ---
 
+- Asked AI for suggestions on restyling the scroll bar to better fit a Baymax-themed color palette.
+- **Observations:**
+  - The new color scheme blended better with the overall Baymax aesthetic, making the UI more cohesive and friendly.
+  - The use of subtle shades kept the design from feeling too aggressive.
+- **Time Saved:** About 30 minutes, as the AI provided curated color suggestions and hover/pressed styling that I could apply directly without trial-and-error.
+
+---
+
 ## Overall Reflection
 - Using AI for JavaDocs was effective for **boilerplate drafting** and **style consistency**.
 - The main limitation was that I had to **verify technical correctness** myself, since ChatGPT doesn’t analyse my actual codebase in detail.

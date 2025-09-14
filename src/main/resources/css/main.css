@@ -1,25 +1,29 @@
 .root {
-    main-color: rgb(237, 255, 242);
+    main-color: #FFF5F7;
     -fx-background-color: main-color;
 }
 
 .text-field {
-    -fx-background-color: #d9ffe2;
+    -fx-background-color: #E5E5E5;
     -fx-font: 20px "Arial";
+    -fx-text-fill: #333333;
 }
 
 .button {
-    -fx-background-color: mediumspringgreen;
+    -fx-background-color: #FFCDD2;
     -fx-font: italic bold 16px "Arial";
+    -fx-text-fill: #333333;
+    -fx-background-radius: 0.5em;
 }
 
 .button:hover {
-    -fx-background-color:cyan;
+    -fx-background-color: #E74C3C;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 18px;
 }
 
 .button:pressed {
-    -fx-background-color:orange;
+    -fx-background-color: #C0392B;
     -fx-font-size: 20px;
 }
 
@@ -29,12 +33,12 @@
 }
 
 .scroll-bar {
-    -fx-font-size: 10px;  /* Change width of scroll bar. */
+    -fx-font-size: 10px;
     -fx-background-color: main-color;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #ff9cb4;
+    -fx-background-color: #FFCDD2;
     -fx-background-radius: 1em;
 }
 
