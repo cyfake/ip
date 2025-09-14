@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Baymax baymax;
 
-    private Image baymaxImage = new Image(this.getClass().getResourceAsStream("/images/baymax.jpg"));
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/hiro.jpg"));
+    private Image baymaxImage = new Image(this.getClass().getResourceAsStream("/images/baymax.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/hiro.png"));
 
     @FXML
     public void initialize() {
