@@ -1,5 +1,5 @@
 	────────────────────────────────────────────────────────────────────────
-	Hello! I am Baymax, your personal chatbot companion.
+	Hello! I am baymax.Baymax, your personal chatbot companion.
 	I am here to help.
 	────────────────────────────────────────────────────────────────────────
 	────────────────────────────────────────────────────────────────────────

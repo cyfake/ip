@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.util.Duration;
 
 public class Baymax {
+    protected boolean isError;
     private Storage storage;
     private TaskList tasks;
     private double EXIT_DELAY = 1.5;
@@ -19,6 +20,7 @@ public class Baymax {
     public Baymax(String filePath) {
         this.storage = new Storage(filePath);
         this.tasks = new TaskList();
+        this.isError = false;
     }
 
     public void start() throws IOException {
@@ -42,6 +44,7 @@ public class Baymax {
             try {
                 storage.save(tasks);
             } catch (IOException e) {
+                this.isError = true;
                 return "Error saving tasks: " + e.getMessage();
             }
 
@@ -52,8 +55,10 @@ public class Baymax {
             return response;
 
         } catch (BaymaxException e) {
+            this.isError = true;
             return e.getMessage();
         } catch (NumberFormatException e) {
+            this.isError = true;
             return "Hmm… that does not appear to be a valid task number. "
                     + "Please provide a whole number so I may help you.";
         }

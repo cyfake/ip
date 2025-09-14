@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Baymax baymax;
 
-    private Image baymaxImage = new Image(this.getClass().getResourceAsStream("/images/baymax.jpg"));
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/hiro.jpg"));
+    private Image baymaxImage = new Image(this.getClass().getResourceAsStream("/images/baymax.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/hiro.png"));
 
     @FXML
     public void initialize() {
@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
 
         dialogContainer.getChildren().add(
                 DialogBox.getBaymaxDialog("Hello! I am Baymax, your personal chatbot companion. "
-                        + "\nI am here to help.", baymaxImage));
+                        + "\nI am here to help.", baymaxImage, false));
     }
 
     /** Injects the Baymax instance */
@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
             baymax.start();
         } catch (IOException e) {
             dialogContainer.getChildren().add(
-                    DialogBox.getBaymaxDialog("Error loading tasks: " + e.getMessage(), baymaxImage)
+                    DialogBox.getBaymaxDialog("Error loading tasks: " + e.getMessage(), baymaxImage, baymax.isError)
             );
         }
     }
@@ -60,8 +60,9 @@ public class MainWindow extends AnchorPane {
         String response = baymax.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getBaymaxDialog(response, baymaxImage)
+                DialogBox.getBaymaxDialog(response, baymaxImage, baymax.isError)
         );
+        baymax.isError = false;
         userInput.clear();
     }
 }
