@@ -50,11 +50,27 @@ public class Parser {
         return args;
     }
 
+    /**
+     * Parses a {@code todo} command input into an {@link AddCommand}.
+     *
+     * @param parts The user input split into the command word and arguments.
+     * @return An {@link AddCommand} that creates a todo task with the given description.
+     * @throws BaymaxException.MissingDescriptionException If no description is provided.
+     */
     private static Command parseTodo(String[] parts) throws BaymaxException {
         String description = requireArgs("todo", parts)[1];
         return AddCommand.todo(description);
     }
 
+    /**
+     * Parses a {@code deadline} command input into an {@link AddCommand}.
+     *
+     * @param parts The user input split into the command word and arguments.
+     * @return An {@link AddCommand} that creates a deadline task with the given description and due date.
+     * @throws BaymaxException.MissingDescriptionException If no description is provided.
+     * @throws BaymaxException.MissingDeadlineException If the {@code /by} portion or date is missing.
+     * @throws BaymaxException.InvalidDateException If the date cannot be parsed into a {@link LocalDate}.
+     */
     private static Command parseDeadline(String[] parts) throws BaymaxException {
         String[] str = requireArgs("deadline", parts)[1].split("/by", 2);
 
@@ -78,6 +94,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an {@code event} command input into an {@link AddCommand}.
+     *
+     * @param parts The user input split into the command word and arguments.
+     * @return An {@link AddCommand} that creates an event task with the given description, start, and end times.
+     * @throws BaymaxException.MissingDescriptionException If no description is provided.
+     * @throws BaymaxException.MissingEventDetailsException If the {@code /from} or {@code /to} arguments are missing or blank.
+     */
     private static Command parseEvent(String[] parts) throws BaymaxException {
         String[] str = requireArgs("event", parts)[1].split("/from | /to");
 
@@ -92,6 +116,13 @@ public class Parser {
         return AddCommand.event(description, start, end);
     }
 
+    /**
+     * Parses a {@code find} command input into a {@link FindCommand}.
+     *
+     * @param parts The user input split into the command word and arguments.
+     * @return A {@link FindCommand} that searches for tasks matching the given keyword.
+     * @throws BaymaxException.MissingDescriptionException If the keyword is missing or blank.
+     */
     private static Command parseFind(String[] parts) throws BaymaxException {
         String keyword = requireArgs("find", parts)[1];
         return new FindCommand(keyword);
