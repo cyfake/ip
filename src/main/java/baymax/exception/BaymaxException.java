@@ -26,8 +26,8 @@ public class BaymaxException extends Exception {
         }
     }
 
-    public static class MissingArgumentsException extends BaymaxException {
-        public MissingArgumentsException() {
+    public static class MissingEventDetailsException extends BaymaxException {
+        public MissingEventDetailsException() {
             super("I am unable to schedule this event without full details. "
                     + "Please use: event <description> /from <start> /to <end>.");
         }
@@ -40,9 +40,9 @@ public class BaymaxException extends Exception {
                             + "Please check again.", index + 1));
         }
 
-        public InvalidIndexException() {
-            super("I have scanned your task list, but that is an invalid argument. "
-                            + "Please use: <command> <index>.");
+        public InvalidIndexException(String command) {
+            super(String.format("I have scanned your task list, but that is an invalid argument. "
+                            + "Please use: %s <index>.", command));
         }
     }
 

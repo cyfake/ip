@@ -38,6 +38,10 @@ public class TaskList {
 
     @Override
     public String toString() {
+        if (this.tasks.isEmpty()) {
+            return "Your list is empty. I will be here when you are ready to add something.";
+        }
+
         StringBuilder str = new StringBuilder("""
                 Here are the tasks I found in your list.
                 Let’s take care of them together:""");
