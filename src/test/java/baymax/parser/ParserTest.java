@@ -74,7 +74,7 @@ public class ParserTest {
     @Test
     public void eventCommand_missingArguments_exceptionThrown() {
         assertThrows(
-                BaymaxException.MissingArgumentsException.class, () -> Parser.parse("event dinner /from")
+                BaymaxException.MissingEventDetailsException.class, () -> Parser.parse("event dinner /from")
         );
     }
 }

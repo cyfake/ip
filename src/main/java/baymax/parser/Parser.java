@@ -43,10 +43,58 @@ public class Parser {
      * @throws BaymaxException.MissingDescriptionException If no description is provided.
      */
     private static String[] requireArgs(String command, String... args) throws BaymaxException {
-        if (args.length < 2) {
+        if (args.length < 2 || args[1].trim().isEmpty()) {
             throw new BaymaxException.MissingDescriptionException(command);
         }
+        args[1] = args[1].trim();
         return args;
+    }
+
+    private static Command parseTodo(String[] parts) throws BaymaxException {
+        String description = requireArgs("todo", parts)[1];
+        return AddCommand.todo(description);
+    }
+
+    private static Command parseDeadline(String[] parts) throws BaymaxException {
+        String[] str = requireArgs("deadline", parts)[1].split("/by", 2);
+
+        if (str.length < 2 || str[1].trim().isEmpty()) {
+            throw new BaymaxException.MissingDeadlineException();
+        }
+
+        String description = str[0].trim();
+
+        if (description.isEmpty()) {
+            throw new BaymaxException.MissingDescriptionException("deadline");
+        }
+
+        String date = str[1].trim();
+
+        try {
+            LocalDate deadline = LocalDate.parse(date);
+            return AddCommand.deadline(description, deadline);
+        } catch (DateTimeParseException e) {
+            throw new BaymaxException.InvalidDateException();
+        }
+    }
+
+    private static Command parseEvent(String[] parts) throws BaymaxException {
+        String[] str = requireArgs("event", parts)[1].split("/from | /to");
+
+        if (str.length != 3 || str[1].trim().isEmpty()) {
+            throw new BaymaxException.MissingEventDetailsException();
+        }
+
+        String description = str[0].trim();
+        String start = str[1].trim();
+        String end = str[2].trim();
+
+        return AddCommand.event(description, start, end);
+    }
+
+    private static Command parseFind(String[] parts) throws BaymaxException {
+        String keyword = requireArgs("find", parts)[1];
+        return new FindCommand(keyword);
     }
 
     /**
@@ -58,53 +106,25 @@ public class Parser {
      *                         invalid dates or indices.
      */
     public static Command parse(String input) throws BaymaxException {
-        String[] parts = input.split(" ", 2);
+        String[] parts = input.strip().split("\\s+", 2);
         String command = parts[0];
-        String description;
-        String[] str;
 
         switch (command) {
         case "list":
             return new ListCommand();
         case "mark", "unmark", "delete":
             if (parts.length < 2) {
-                throw new BaymaxException.InvalidIndexException();
+                throw new BaymaxException.InvalidIndexException(command);
             }
             return new UpdateCommand(command, parseIndex(parts));
         case "todo":
-            description = requireArgs(command, parts)[1];
-            return AddCommand.todo(description);
+            return parseTodo(parts);
         case "deadline":
-            str = requireArgs(command, parts)[1].split(" /by ", 2);
-
-            if (str.length < 2) {
-                throw new BaymaxException.MissingDeadlineException();
-            }
-
-            description = str[0];
-            String date = str[1];
-
-            try {
-                LocalDate deadline = LocalDate.parse(date);
-                return AddCommand.deadline(description, deadline);
-            } catch (DateTimeParseException e) {
-                throw new BaymaxException.InvalidDateException();
-            }
+            return parseDeadline(parts);
         case "event":
-            str = requireArgs(command, parts)[1].split(" /from | /to ");
-
-            if (str.length < 2) {
-                throw new BaymaxException.MissingArgumentsException();
-            }
-
-            description = str[0];
-            String start = str[1];
-            String end = str[2];
-
-            return AddCommand.event(description, start, end);
+            return parseEvent(parts);
         case "find":
-            String keyword = requireArgs(command, parts)[1];
-            return new FindCommand(keyword);
+            return parseFind(parts);
         case "bye":
             return new ExitCommand();
         default:
