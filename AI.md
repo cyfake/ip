@@ -30,7 +30,7 @@ I primarily used **ChatGPT (OpenAI GPT-5)** to assist with writing and refining 
 
 ---
 
-- Asked AI for suggestions on restyling the scroll bar to better fit a Baymax-themed color palette.
+- Asked AI for suggestions on restyling the GUI to better fit a Baymax-themed color palette.
 - **Observations:**
   - The new color scheme blended better with the overall Baymax aesthetic, making the UI more cohesive and friendly.
   - The use of subtle shades kept the design from feeling too aggressive.
