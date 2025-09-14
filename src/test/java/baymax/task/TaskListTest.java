@@ -52,8 +52,8 @@ public class TaskListTest {
 
         assertEquals("""
                         Got it. I've added this task:
-                        \t\t[ ] baymax
-                        \tNow you have 1 tasks in the list.""",
+                        \t[ ] baymax
+                        Now you have 1 tasks in the list.""",
                 tasks.addTask(t));
 
         assertEquals(1, tasks.getAll().size());

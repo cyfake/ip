@@ -42,7 +42,7 @@ public class BaymaxException extends Exception {
 
         public InvalidIndexException() {
             super("I have scanned your task list, but that is an invalid argument. "
-                            + "Please use: mark <index>.");
+                            + "Please use: <command> <index>.");
         }
     }
 

@@ -50,8 +50,13 @@ public class DialogBox extends HBox {
         return new DialogBox(s, i);
     }
 
-    public static DialogBox getBaymaxDialog(String s, Image i) {
+    public static DialogBox getBaymaxDialog(String s, Image i, boolean isError) {
         var db = new DialogBox(s, i);
+
+        if (isError) {
+            db.dialog.getStyleClass().add("error-label");
+        }
+
         db.flip();
         return db;
     }
