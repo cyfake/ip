@@ -29,8 +29,8 @@ public class TaskList {
         this.tasks.add(task);
         return String.format("""
                         Got it. I've added this task:
-                        \t\t%s
-                        \tNow you have %d tasks in the list.""",
+                        \t%s
+                        Now you have %d tasks in the list.""",
                 task,
                 tasks.size());
 
