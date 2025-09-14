@@ -2,12 +2,14 @@
 
 ![Baymax UI](Ui.png)
 
-> **Hello! I am Baymax, your personal chatbot companion. I am here to help.**
+_**Hello! I am Baymax, your personal chatbot companion. I am here to help.**_
 
 Baymax is a friendly, text-based chatbot that helps you remember things you need to do, deadlines to meet 
-and events you scheduled. He helps you manage tasks such as todos, deadlines, and events - all with his caring 
-and understanding personality! Interact with Baymax using simple text commands, and he will 
-respond in his signature style.
+and events you scheduled. 
+
+He helps you manage tasks such as todos, deadlines, and events - all with his caring and understanding personality! 
+
+Interact with Baymax using simple text commands, and he will respond in his signature style.
 
 ## Add a Todo
 
